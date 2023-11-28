@@ -1,4 +1,4 @@
-# Terraform
+# Terraform - PIN FINAL - GRUPO 5
 ## Provider AWS
 ### Action: Create Security group and Create EC2 - t2.micro
 
@@ -6,5 +6,3 @@
 ##### ```terraform init```
 ##### ```terraform plan```
 ##### ```terraform apply```
-
-This repository is a laboratory of https://www.whizlabs.com/ 
