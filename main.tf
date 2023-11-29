@@ -16,14 +16,12 @@ provider "aws" {
 ## Security groups
 module "sg" {
   source = ".//sg"
-  tags   = var.tags
 }
 
 ## AWS key
 module "keys" {
   source   = ".//keys"
   key_path = ".//keys/pin.pem"
-  tags     = var.tags
 }
 
 ## AWS roles
@@ -60,5 +58,4 @@ module "server_pin_final_web" {
   volume_size          = "50"
   key-id               = module.keys.pin-id
   iam_instance_profile = aws_iam_instance_profile.resources-iam-profile.name
-  
 }

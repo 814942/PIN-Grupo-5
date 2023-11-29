@@ -12,18 +12,8 @@ resource "aws_instance" "app_server" {
     delete_on_termination = true
   }
   user_data       = file(".//user_data/ec2_user_data.sh")
-  
+  tags = {
+    Environment = var.tags["env"]
+    project     = var.tags["project"]
+  }
 }
-
-#resource "aws_network_interface" "primary_interface" {
-  #subnet_id       = ""
-  #private_ips     = [""]
-  #security_groups = [var.sg-id]
-  #attachment {
-    #instance     = aws_instance.app_server.id
-    #device_index = 0
-  #}
-  #tags = (
-    #var.tags
-  #)
-#}

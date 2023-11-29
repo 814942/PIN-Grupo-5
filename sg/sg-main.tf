@@ -20,5 +20,8 @@ resource "aws_security_group" "pin-final-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+  tags = {
+    Environment = var.tags["env"]
+    project     = var.tags["project"]
+  }
 }

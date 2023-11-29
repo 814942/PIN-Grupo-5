@@ -3,7 +3,9 @@ variable "key_path" {
 }
 
 variable "tags" {
-  type        = string
-  default     = "pin-final-grupo-5"
-  description = "Tags"
+  type = map(string)
+  default = {
+    env     = "prod"
+    project = "pin-final-grupo-5"
+  }
 }

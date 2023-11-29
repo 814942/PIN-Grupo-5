@@ -1,7 +1,9 @@
 variable "tags" {
-  type        = string
-  default =  "pin-final-grupo-5"
-  description = "pin-final-grupo-5"
+  type = map(string)
+  default = {
+    env     = "prod"
+    project = "pin-final-grupo-5"
+  }
 }
 
 variable "description" {
