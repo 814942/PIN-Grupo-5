@@ -1,9 +1,19 @@
-variable "access_key" {
-  description = "Access key to AWS console"
+variable "tags" {
+  type        = string
+  default     = "pin-final-grupo-5"
+  description = "pin-final-grupo-5"
 }
-variable "secret_key" {
-  description = "Secret key to AWS console"
-}
+
 variable "region" {
-  description = "Region of AWS VPC"
+  type        = string
+  default     = "us-east-1"
+  description = "Aws region"
+}
+
+variable "access_key" {
+  default = "access_key"
+}
+
+variable "secret_key" {
+  default = "secret_key"
 }
