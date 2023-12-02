@@ -4,7 +4,7 @@ resource "aws_instance" "app_server" {
   key_name             = var.key-id
   iam_instance_profile = var.iam_instance_profile
   hibernation          = "false"
-  security_groups      = [var.sg-id]
+  security_groups      = [var.sg-name]
   root_block_device {
     volume_size           = var.volume_size
     volume_type           = "gp2"

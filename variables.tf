@@ -8,7 +8,7 @@ variable "tags" {
 
 variable "region" {
   type        = string
-  default     = "us-east-1"
+  default     = "us-east-2"
   description = "Aws region"
 }
 

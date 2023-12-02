@@ -1,4 +1,4 @@
-variable "sg-id" {
+variable "sg-name" {
   description = "Security group id"
 }
 
@@ -19,6 +19,7 @@ variable "instance_type" {
 }
 
 variable "ami" {
+  default = "ami-0c55b159cbfafe1f0"
   description = "AMI id"
 }
 
