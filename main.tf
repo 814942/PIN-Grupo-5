@@ -54,7 +54,7 @@ module "server_pin_final_web" {
   source               = ".//ec2-pin-final"
   sg-name              = module.sg.pin-final-server-sg
   instance_type        = "t2.small"
-  ami                  = "ami-0c55b159cbfafe1f0"
+  ami                  = "ami-09cce346b3952cce3"
   volume_size          = 50
   key-id               = module.keys.pin-id
   iam_instance_profile = aws_iam_instance_profile.resources-iam-profile.name
