@@ -34,18 +34,64 @@ resource "aws_iam_role" "resources-iam-role" {
   name        = "ec2-admin"
   description = "The role for infra EC2"
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
-        Effect = "Allow"
+        Effect = "Allow",
         Principal = {
           Service = "ec2.amazonaws.com"
-        }
+        },
         Action = "sts:AssumeRole"
       }
     ]
   })
+}
+
+resource "aws_iam_policy" "ec2-describe-instances" {
+  name        = "ec2-describe-instances-policy"
+  description = "Policy to describe EC2 instances"
   
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = "ec2:DescribeInstanceTypeOfferings",
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach-describe-instances-policy" {
+  policy_arn = aws_iam_policy.ec2-describe-instances.arn
+  role       = aws_iam_role.resources-iam-role.name
+}
+
+resource "aws_iam_policy" "ec2-admin-policy" {
+  name        = "ec2-admin-policy"
+  description = "Policy for EC2 admin role"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "ec2:*",
+          "iam:*",
+          "eks:*",
+          "cloudformation:*"
+        ],
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach-ec2-admin-policy" {
+  policy_arn = aws_iam_policy.ec2-admin-policy.arn
+  role       = aws_iam_role.resources-iam-role.name
 }
 
 ## EC2
