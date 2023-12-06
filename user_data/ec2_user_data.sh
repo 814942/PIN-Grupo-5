@@ -1,6 +1,6 @@
 #!/bin/bash
-
 echo "Installing AWS CLI"
+sudo apt  install awscli
 
 echo "Installing kubectl"
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl
@@ -18,19 +18,10 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 eksctl version
 
 echo "Installing docker"
-sudo yum install -y docker
-sudo usermod -a -G docker ec2-user
-newgrp docker
-wget https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) 
-sudo mv docker-compose-$(uname -s)-$(uname -m) /usr/local/bin/docker-compose
-sudo chmod -v +x /usr/local/bin/docker-compose
-sudo systemctl enable docker.service
-sudo systemctl start docker.service
+sudo snap install docker
 
 echo "Installing terraform "
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum install -y terraform
+sudo apt-get install terraform
 
 echo "Installing Helm"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
