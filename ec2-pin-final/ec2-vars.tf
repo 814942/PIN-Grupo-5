@@ -11,6 +11,7 @@ variable "tags" {
 }
 
 variable "key-id" {
+  default = "pin"
   description = "SSH key"
 }
 

@@ -1,15 +1,14 @@
 #!/bin/bash
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
 echo "Installing AWS CLI"
-sudo apt install awscli
+sudo apt install awscli -y
 
-echo "Installing kubectl"
-curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/amd64/kubectl
-chmod +x ./kubectl
-mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+sudo rm /usr/bin/kubectl
+sudo curl -LO "https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl"
+sudo chmod +x kubectl
+sudo mv kubectl /usr/bin/
 kubectl version --client
 
 echo "Installing ekctl"

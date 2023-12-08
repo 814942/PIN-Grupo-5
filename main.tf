@@ -19,10 +19,10 @@ module "sg" {
 }
 
 ## AWS key
-module "keys" {
+/*module "keys" {
   source   = ".//keys"
   key_path = ".//keys/pin.pem"
-}
+}*/
 
 ## AWS roles
 resource "aws_iam_instance_profile" "resources-iam-profile" {
@@ -56,7 +56,7 @@ resource "aws_iam_policy" "ec2-describe-instances" {
     Statement = [
       {
         Effect = "Allow",
-        Action = "ec2:DescribeInstanceTypeOfferings",
+        Action = "*",
         Resource = "*"
       }
     ]
@@ -68,40 +68,14 @@ resource "aws_iam_role_policy_attachment" "attach-describe-instances-policy" {
   role       = aws_iam_role.resources-iam-role.name
 }
 
-resource "aws_iam_policy" "ec2-admin-policy" {
-  name        = "ec2-admin-policy"
-  description = "Policy for EC2 admin role"
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "ec2:*",
-          "iam:*",
-          "eks:*",
-          "cloudformation:*"
-        ],
-        Resource = "*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "attach-ec2-admin-policy" {
-  policy_arn = aws_iam_policy.ec2-admin-policy.arn
-  role       = aws_iam_role.resources-iam-role.name
-}
-
 ## EC2
 #=================================================== Linux Server - PIN FINAL ====================================================
 module "server_pin_final_web" {
   source               = ".//ec2-pin-final"
   sg-name              = module.sg.pin-final-server-sg
-  instance_type        = "t2.small"
+  instance_type        = "t2.micro"
   ami                  = "ami-07b36ea9852e986ad"
-  volume_size          = 50
-  key-id               = module.keys.pin-id
+  volume_size          = 20
+  #key-id               = module.keys.pin-id
   iam_instance_profile = aws_iam_instance_profile.resources-iam-profile.name
 }
