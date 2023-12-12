@@ -26,6 +26,8 @@ echo "Installing terraform "
 sudo apt-get install terraform
 
 echo "Installing Helm"
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod +x get_helm.sh
-./get_helm.sh
+wget https://get.helm.sh/helm-v3.7.1-linux-386.tar.gz
+tar -zxvf helm-v3.7.1-linux-386.tar.gz
+sudo mv linux-386/helm /usr/local/bin/helm
+chmod +x /usr/local/bin/helm
+helm version
